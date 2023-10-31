@@ -1,7 +1,6 @@
-import React from 'react'
-import Skeleton from 'react-loading-skeleton'
+import { Skeleton } from '@/app/components'
+import { Table } from '@radix-ui/themes'
 import 'react-loading-skeleton/dist/skeleton.css'
-import {Button, Table} from '@radix-ui/themes'
 import IssueActions from './issueActions'
 
 const loading = () => {
