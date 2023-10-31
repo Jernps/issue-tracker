@@ -32,21 +32,22 @@ const NewIssuePage = () => {
         setError('An unexpected error occurred.')
       }
       })
+  
 
   return (
     <div className='max-w-xl '>
       {error && (<Callout.Root color='red' className='mb-5'><Callout.Text>{error}</Callout.Text></Callout.Root>)}
         <form className='space-y-3' onSubmit={onSubmit}>
-    <TextField.Root>
-        <TextField.Input placeholder='Title' {...register('title')} />
-    </TextField.Root>
-    <ErrorMessage>{errors.title?.message}</ErrorMessage>
-    <Controller 
-      name='description'
-      control = {control}
-      render={ ({field}) => <SimpleMDE placeholder='Description' {...field} />}
-    />
-    <ErrorMessage>{errors.description?.message}</ErrorMessage>
+      <TextField.Root>
+          <TextField.Input placeholder='Title' {...register('title')} />
+      </TextField.Root>
+      <ErrorMessage>{errors.title?.message}</ErrorMessage>
+      <Controller 
+        name='description'
+        control = {control}
+        render={ ({field}) => <SimpleMDE placeholder='Description' {...field} />}
+      />
+      <ErrorMessage>{errors.description?.message}</ErrorMessage>
     
     <Button disabled={isSubmitting}>Submit New Issue {isSubmitting && <Spiner/>} </Button>
   </form>
