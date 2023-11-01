@@ -3,7 +3,7 @@ import { Box, Flex, Grid } from '@radix-ui/themes'
 import { notFound } from 'next/navigation'
 import EditIssueButton from './EditIssueButton'
 import IssueDetails from './IssueDetails'
-import DeleteIssuebutton from './DeleteIssuebutton'
+import DeleteIssueButton from './DeleteIssueButton'
 
 interface Props{
     params: {id:string}
@@ -26,7 +26,7 @@ const IssueDeatilPage = async ({params} : Props) => {
       <Box>
         <Flex direction="column" gap="4" >        
           <EditIssueButton issueId={issue.id} />
-          <DeleteIssuebutton issueId={issue.id} />
+          <DeleteIssueButton issueId={issue.id} />
         </Flex>
       </Box>
      </Grid>
