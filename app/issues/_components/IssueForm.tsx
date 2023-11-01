@@ -1,6 +1,6 @@
 'use client'
 import { ErrorMessage, Spiner } from '@/app/components';
-import { createIssueSchema } from '@/app/validationSchema';
+import { issueSchema } from '@/app/validationSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Issue } from '@prisma/client';
 import { Button, Callout, TextField } from '@radix-ui/themes';
@@ -14,12 +14,12 @@ import { z } from 'zod';
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr : false})
 
-type IssueFormData = z.infer<typeof createIssueSchema>
+type IssueFormData = z.infer<typeof issueSchema>
 
 const IssueForm = ({issue} : { issue?: Issue}) => {
   const router = useRouter();
   const { register, control, handleSubmit ,formState: {errors}} = useForm<IssueFormData>({
-    resolver: zodResolver(createIssueSchema)
+    resolver: zodResolver(issueSchema)
   });
   const [ error, setError] = useState('');
   const [ isSubmitting, setSubmitting] = useState(false)
@@ -27,8 +27,11 @@ const IssueForm = ({issue} : { issue?: Issue}) => {
   const onSubmit = handleSubmit(async (data) => {
       try {
         setSubmitting(true)
+        if(issue)
+         await axios.patch(`/api/issues/${issue.id}`, data)
+        else
          await axios.post('/api/issues', data); 
-          router.push('/issues')
+        router.push('/issues')
       } catch (error) {
         setSubmitting(false)
         setError('An unexpected error occurred.')
@@ -52,7 +55,7 @@ const IssueForm = ({issue} : { issue?: Issue}) => {
       />
       <ErrorMessage>{errors.description?.message}</ErrorMessage>
     
-    <Button disabled={isSubmitting}>Submit New Issue {isSubmitting && <Spiner/>} </Button>
+    <Button disabled={isSubmitting}>{ issue ? 'Update Issue' : 'Submit New Issue'}{' '}{isSubmitting && <Spiner/>} </Button>
   </form>
     </div>
   
