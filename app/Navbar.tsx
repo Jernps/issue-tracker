@@ -35,7 +35,7 @@ const Navbar = () => {
             </li>
         )}
     </ul>
-    <Link href="/api/auth/signin">Log in</Link>
+    
     {/* <Box>
         {status === "authenticated" && <Link href="/api/auth/signout">Log out</Link>}
         {status === "unauthenticated" && <Link href="/api/auth/signin">Log in</Link>}
