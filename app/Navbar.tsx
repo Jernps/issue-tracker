@@ -9,7 +9,7 @@ import { Box } from '@radix-ui/themes'
 
 const Navbar = () => {
     const currentPath = usePathname();
-    // const {status, data:session} = useSession();
+    const {status, data:session} = useSession();
 
     const links = [
         {label:'Dashboard', href: '/'},
@@ -36,10 +36,10 @@ const Navbar = () => {
         )}
     </ul>
     
-    {/* <Box>
+    <Box>
         {status === "authenticated" && <Link href="/api/auth/signout">Log out</Link>}
         {status === "unauthenticated" && <Link href="/api/auth/signin">Log in</Link>}
-    </Box> */}
+    </Box>
    </nav>
   )
 }
