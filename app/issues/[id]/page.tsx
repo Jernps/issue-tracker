@@ -3,7 +3,7 @@ import { Box, Flex, Grid } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import EditIssueButton from "./EditIssueButton";
 import IssueDetails from "./IssueDetails";
-import DeleteIssueButton from "./DeleteIssueButton";
+import DeleteIssueButton from "./DeleteIssuebutton";
 import { getServerSession } from "next-auth";
 import authOptions from "@/app/auth/authOptions";
 import AssigneeSelect from "./AssigneeSelect";
@@ -39,6 +39,17 @@ const IssueDeatilPage = async ({ params }: Props) => {
   );
 };
 
-export const dynamic = "force-dynamic";
+export async function generateMetaData({ params }: Props) {
+  const issue = await prisma.issue.findUnique({
+    where: { id: parseInt(params.id) },
+  });
+
+  return {
+    title: issue?.title,
+    description: 'Details of issue' + issue?.id,
+  };
+}
+
+// export const dynamic = "force-dynamic";
 
 export default IssueDeatilPage;
