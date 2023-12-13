@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Pagination from "./components/pagination";
+import Pagination from "@/app/components/Pagination";
 
 export default function Home({
   searchParams,
